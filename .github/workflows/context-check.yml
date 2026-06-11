@@ -1,0 +1,23 @@
+name: Agent context check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  context-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Smoke test installer and CLI
+        run: ./scripts/smoke-test.sh
+      - name: Check agent context
+        run: |
+          if [ -d docs/tasks ]; then
+            python3 tools/agent-context.py check-all --strict
+          else
+            echo "No docs/tasks directory found; skipping context check."
+          fi

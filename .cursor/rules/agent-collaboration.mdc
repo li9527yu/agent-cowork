@@ -1,0 +1,28 @@
+---
+description: Preserve task context across AI agents using Context Pack, Handoff, and PR Context Diff files.
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# Agent Collaboration Workflow
+
+Before substantial changes, read:
+
+- `AGENTS.md`
+- `docs/ai-collaboration-sop.md`
+- `docs/tasks/<task-id>/context-pack.md`
+- `docs/tasks/<task-id>/handoff.md`
+
+Keep task context current:
+
+- Update the Context Pack when goals, assumptions, constraints, decisions, validation evidence, or risks change.
+- Update the Handoff before stopping work.
+- Update the PR Context Diff before review.
+- Do not invent decisions or evidence. Mark unknowns as `TODO(<owner>): ...`.
+
+Validation:
+
+```bash
+python3 tools/agent-context.py check-all --strict
+```
